@@ -1,0 +1,6 @@
+{
+	"appId": "com.roscolive.driverid",
+	"appName": "RL Driver ID",
+	"webDir": "build",
+	"bundledWebRuntime": false
+}

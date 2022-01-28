@@ -1,0 +1,12 @@
+
+.input-wrapper {
+  padding-top: 5rem;
+  height: 100%;
+}
+
+.input-wrapper .button {
+  position: absolute;
+  width: 95%;
+  right: 2%;
+  bottom: 1rem;
+}

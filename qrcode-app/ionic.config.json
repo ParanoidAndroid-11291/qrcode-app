@@ -1,0 +1,7 @@
+{
+  "name": "RL Driver ID",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}

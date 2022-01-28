@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">RL Driver ID</string>
+    <string name="title_activity_main">RL Driver ID</string>
+    <string name="package_name">com.roscolive.driverid</string>
+    <string name="custom_url_scheme">com.roscolive.driverid</string>
+</resources>
