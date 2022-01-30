@@ -8,6 +8,7 @@
     "test": "react-scripts test"
   },
   "dependencies": {
+    "@capacitor-community/screen-brightness": "^1.0.1",
     "@capacitor/android": "3.4.0",
     "@capacitor/app": "1.1.0",
     "@capacitor/core": "3.4.0",

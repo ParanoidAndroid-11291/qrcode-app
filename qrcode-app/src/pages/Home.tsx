@@ -11,7 +11,8 @@ import {
   IonButton,
   useIonToast
 } from '@ionic/react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { ScreenBrightness } from '@capacitor-community/screen-brightness';
 
 import './Home.css';
 
@@ -19,6 +20,16 @@ const Home: React.FC = () => {
   const [ input, setInput ] = useState<string>('');
   const [ qrCode, setQrCode ] = useState<string>('A1B2C3D4')
   const [ present, dismiss ] = useIonToast();
+
+  useEffect(() => {
+    const handleBrightness = async () => {
+      const { brightness: currentBrightness } = await ScreenBrightness.getBrightness();
+      if ( currentBrightness < 0.6 ) {
+        await ScreenBrightness.setBrightness({ brightness: 1.0 });
+      }
+    }
+    handleBrightness();
+  }, []);
 
   console.log('QR code', qrCode);
 
@@ -30,7 +41,7 @@ const Home: React.FC = () => {
         color: 'danger'
       });
     }else {
-      setQrCode(qrCode.toUpperCase);
+      setQrCode(qrCode);
     }
   };
 
@@ -47,6 +58,7 @@ const Home: React.FC = () => {
           <IonItem>
             <IonLabel>Enter Driver ID</IonLabel>
             <IonInput
+              autocapitalize="characters"
               clearInput
               value={input}
               onIonChange={(e: any) => setInput(e.detail.value)}
