@@ -13,23 +13,44 @@ import {
 } from '@ionic/react';
 import { useState, useEffect } from 'react';
 import { ScreenBrightness } from '@capacitor-community/screen-brightness';
+import { Storage } from '@capacitor/storage';
 
 import './Home.css';
 
 const Home: React.FC = () => {
   const [ input, setInput ] = useState<string>('');
-  const [ qrCode, setQrCode ] = useState<string>('A1B2C3D4')
+  const [ qrCode, setQrCode ] = useState<string>()
   const [ present, dismiss ] = useIonToast();
 
+  //sets phone brightness to full, sets QR code from local storage.
   useEffect(() => {
-    const handleBrightness = async () => {
-      const { brightness: currentBrightness } = await ScreenBrightness.getBrightness();
-      if ( currentBrightness < 0.6 ) {
-        await ScreenBrightness.setBrightness({ brightness: 1.0 });
-      }
-    }
+    const handleBrightness = async () => await ScreenBrightness.setBrightness({ brightness: 1.0 });
     handleBrightness();
-  }, []);
+
+    getQrCode().then( (qrCode) => {
+      console.log('useEffect qrCode', qrCode);
+      if(qrCode !== null){
+        setQrCode(qrCode);
+        setInput(qrCode);
+      }else {
+        setQrCode('A1B2C3D4');
+      }
+    });
+  },[]);
+
+  const storeQrCode = async (qrCode: string) => {
+    await Storage.set({
+      key: "driver_id",
+      value: qrCode
+    });
+    setQrCode(qrCode);
+  };
+
+  const getQrCode = async () => {
+    const { value } = await Storage.get({ key: "driver_id" });
+    console.log('getQrCode value', value);
+    return value;
+  }
 
   console.log('QR code', qrCode);
 
@@ -41,7 +62,8 @@ const Home: React.FC = () => {
         color: 'danger'
       });
     }else {
-      setQrCode(qrCode);
+      //setQrCode(qrCode);
+      storeQrCode(qrCode);
     }
   };
 

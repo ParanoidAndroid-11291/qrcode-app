@@ -16,6 +16,7 @@
     "@capacitor/keyboard": "1.2.1",
     "@capacitor/splash-screen": "^1.2.1",
     "@capacitor/status-bar": "1.0.7",
+    "@capacitor/storage": "^1.2.4",
     "@ionic/react": "^6.0.0",
     "@ionic/react-router": "^6.0.0",
     "ionicons": "^5.5.4",
