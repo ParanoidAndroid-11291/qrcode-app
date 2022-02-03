@@ -1,13 +1,19 @@
 apply plugin: 'com.android.application'
 
+def versionMajor = 0;
+def versionMinor = 1;
+def versionPatch = 1;
+
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
     defaultConfig {
         applicationId "com.roscolive.driverid"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        versionCode versionMajor * 100000 +
+                    versionMinor * 1000 +
+                    versionPatch * 10
+        versionName "v" + versionMajor.toString() + "." + versionMinor.toString() + "." + versionPatch.toString()
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         aaptOptions {
              // Files and dirs to omit from the packaged assets dir, modified to accommodate modern web apps.
