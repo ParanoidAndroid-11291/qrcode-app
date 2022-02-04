@@ -59,11 +59,17 @@ const Home: React.FC = () => {
       present({
         message: "Driver ID needs to be 8 characters long",
         duration: 2000,
+        position: 'top',
         color: 'danger'
       });
     }else {
-      //setQrCode(qrCode);
       storeQrCode(qrCode);
+      present({
+        message: "QR Code Generated",
+        duration: 2000,
+        position: 'top',
+        color: "secondary"
+      });
     }
   };
 
@@ -78,7 +84,7 @@ const Home: React.FC = () => {
         <IonImg src={`https://barcodeapi.org/api/qr/${qrCode}`} alt=""></IonImg>
         <div className="input-wrapper">
           <IonItem>
-            <IonLabel>Enter Driver ID</IonLabel>
+            <IonLabel position="floating">Enter Driver ID</IonLabel>
             <IonInput
               autocapitalize="characters"
               clearInput
