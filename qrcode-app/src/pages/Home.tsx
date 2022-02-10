@@ -13,6 +13,7 @@ import {
 } from '@ionic/react';
 import { useState, useEffect } from 'react';
 import { ScreenBrightness } from '@capacitor-community/screen-brightness';
+import { BarcodeScanner } from '@capacitor-community/barcode-scanner';
 import { Storage } from '@capacitor/storage';
 
 import './Home.css';
@@ -73,6 +74,39 @@ const Home: React.FC = () => {
     }
   };
 
+  const stopScan = () => {
+    console.log('stopScan');
+    document.body.style.visibility = "visible";
+    BarcodeScanner.showBackground();
+    BarcodeScanner.stopScan();
+  };
+
+  const startScan = async () => {
+    console.log('startScan');
+    document.body.style.visibility = "hidden";
+    BarcodeScanner.hideBackground();
+
+    const result = await BarcodeScanner.startScan();
+    console.log("~~result",result);
+    if (result !== undefined && result.hasContent) {
+      console.log('QRcode Scanned',result);
+      stopScan();
+    }
+  };
+
+  const checkPermission = async () => {
+    BarcodeScanner.prepare();
+
+    const status = await BarcodeScanner.checkPermission({ force: true });
+
+    if(status.granted) {
+      console.log('Permission Granted');
+      startScan();
+    } else {
+      stopScan();
+    }
+  };
+
   return (
     <IonPage>
       <IonHeader hidden>
@@ -93,7 +127,8 @@ const Home: React.FC = () => {
               >
               </IonInput>
           </IonItem>
-          <IonButton expand="block" onClick={() => handleGenerate(input)}>Generate</IonButton>
+          <IonButton id="scan-btn" color="secondary" expand="block" onClick={() => checkPermission()}>Scan</IonButton>
+          <IonButton id="generate-btn" expand="block" onClick={() => handleGenerate(input)}>Generate</IonButton>
         </div>
       </IonContent>
     </IonPage>

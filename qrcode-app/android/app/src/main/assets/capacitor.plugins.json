@@ -1,5 +1,9 @@
 [
 	{
+		"pkg": "@capacitor-community/barcode-scanner",
+		"classpath": "com.dutchconcepts.capacitor.barcodescanner.BarcodeScanner"
+	},
+	{
 		"pkg": "@capacitor-community/screen-brightness",
 		"classpath": "com.elylucas.capscreenbrightness.ScreenBrightnessPlugin"
 	},

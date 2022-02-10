@@ -3,7 +3,7 @@
   padding-top: 5rem;
 }
 
-.input-wrapper .button {
+.input-wrapper #generate-btn {
   position: absolute;
   width: 95%;
   right: 2%;
