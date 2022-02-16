@@ -83,13 +83,18 @@ const Home: React.FC = () => {
 
   const startScan = async () => {
     console.log('startScan');
+
+    //camera is rendered behind app.
+    //hides components to view camera
     document.body.style.visibility = "hidden";
+    document.body.style.background = "transparent";
     BarcodeScanner.hideBackground();
 
     const result = await BarcodeScanner.startScan();
     console.log("~~result",result);
     if (result !== undefined && result.hasContent) {
       console.log('QRcode Scanned',result);
+      setQrCode(result.content);
       stopScan();
     }
   };
